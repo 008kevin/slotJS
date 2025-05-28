@@ -10,6 +10,7 @@ function generateNewRandoms() {
 const spin = document.querySelectorAll(".button")[0];
 if (spin) {
     spin.addEventListener("click", () => {
+        removeMoney(10)
         let randomNums = generateNewRandoms();
         let cols = document.querySelectorAll(".col");
         for (let i = 0; i < cols.length; i++) {

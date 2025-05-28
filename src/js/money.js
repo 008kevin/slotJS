@@ -32,9 +32,7 @@ let resultButton = document.querySelectorAll(".button")[1];
 resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
     if (table) {
         
-        if(table.rows.length > 20){
-            transactions.shift()
-        }
+        
         table.innerHTML = "";
         transactions.forEach((transaction, index) => {
             let row = table === null || table === void 0 ? void 0 : table.insertRow(0);

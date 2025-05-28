@@ -24,6 +24,8 @@ if (spin) {
         for (let i = 0; i < cols.length; i++) {
             cols[i].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[i])}"></i>`;
         }
+
+        balanceUpdate()
     }
     
         

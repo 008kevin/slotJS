@@ -44,3 +44,8 @@ resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEven
     }
 });
 
+let balance = document.querySelectorAll(".balance")
+function balanceUpdate(){
+    balance.innerHTML = `Pénz: ${money}$`
+}
+

@@ -11,7 +11,6 @@ const spin = document.querySelectorAll(".button")[0];
 if (spin) {
     spin.addEventListener("click", () => {
         let randomNums = generateNewRandoms();
-        1;
         let cols = document.querySelectorAll(".col");
         for (let i = 0; i < cols.length; i++) {
             cols[i].innerText = randomNums[i].toString();

@@ -1,4 +1,3 @@
-import {removeMoney, addMoney} from "./money.js"
 
 function generateNewRandoms() {
     let randomNums = [];

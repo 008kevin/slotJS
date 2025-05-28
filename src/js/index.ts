@@ -14,7 +14,7 @@ if (spin) {
         let randomNums : number[] = generateNewRandoms();1
         let cols = document.querySelectorAll<HTMLElement>(".col");
         for (let i = 0; i < cols.length; i++) {
-            cols[i].innerText = randomNums[i].toString();
+            cols[i].innerText = randomNums[i].toString(); //fontawesome
         }
     });
 }

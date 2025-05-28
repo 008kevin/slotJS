@@ -1,4 +1,5 @@
 let icons = {
+    0: "fa-circle",
     1: "fa-bomb",
     2: "fa-heart",
     3: "fa-money-bill",

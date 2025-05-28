@@ -1,4 +1,5 @@
-"use strict";
+import {removeMoney, addMoney} from "./money.js"
+
 function generateNewRandoms() {
     let randomNums = [];
     let colNum = document.querySelectorAll(".col").length;

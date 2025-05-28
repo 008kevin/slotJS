@@ -1,31 +1,31 @@
-"use strict";
 let money;
 let transactions = [];
 if (localStorage.getItem("money") !== null) {
     money = parseFloat(localStorage.getItem("money"));
     transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    if(transactions == []){
+        transactions.push(money)
+    }
 }
 else {
     money = 1000;
     transactions.push(money);
 }
+
 function removeMoney(amount) {
     money -= amount;
     transactions.push(money);
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
+
 function addMoney(amount) {
     money += amount;
     transactions.push(money);
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
-function getTransactions() {
-    transactions.forEach((p) => {
-        console.log(p);
-    });
-}
+
 let table = document.querySelectorAll(".table")[0];
 let resultButton = document.querySelectorAll(".button")[1];
 resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {

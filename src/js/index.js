@@ -22,7 +22,7 @@ if (spin) {
         let randomNums = generateNewRandoms();
         let cols = document.querySelectorAll(".col");
         for (let i = 0; i < cols.length; i++) {
-            cols[i].innerText = randomNums[i].toString();
+            cols[i].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[i])}"></i>`;
         }
     }
     

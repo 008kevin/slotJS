@@ -3,7 +3,7 @@ function generateNewRandoms() {
     let randomNums = [];
     let colNum = document.querySelectorAll(".col").length;
     for (let i = 0; i < colNum; i++) {
-        randomNums.push(Math.floor(Math.random() * 20));
+        randomNums.push(Math.floor(Math.random() * 10));
     }
     return randomNums;
 }
@@ -19,10 +19,14 @@ if (spin) {
         if(transactions.length > 20){
             transactions.shift()
         }
-        let randomNums = generateNewRandoms();
-        let cols = document.querySelectorAll(".col");
-        for (let i = 0; i < cols.length; i++) {
-            cols[i].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[i])}"></i>`;
+        
+        for (let i = 0; i < 20; i++) {
+            let randomNums = generateNewRandoms();
+            let cols = document.querySelectorAll(".col");
+            for (let j = 0; j < cols.length; j++) {
+                cols[i].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[j])}"></i>`;
+            }
+            // TODO: varakozas animacionak
         }
     }
     

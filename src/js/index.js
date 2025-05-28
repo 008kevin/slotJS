@@ -28,6 +28,8 @@ if (spin) {
             }
             // TODO: varakozas animacionak
         }
+
+        balanceUpdate()
     }
     
         

@@ -1,3 +1,4 @@
+let cols = document.querySelectorAll(".col");
 
 function generateNewRandoms() {
     let randomNums = [];
@@ -9,30 +10,64 @@ function generateNewRandoms() {
 }
 const spin = document.querySelectorAll(".button")[0];
 if (spin) {
-    
     spin.addEventListener("click", () => {
-        if(money <= 0){
-            alert("Broke lol")
-        }
-    else{
-        removeMoney(10);
-        if(transactions.length > 20){
-            transactions.shift()
-        }
-        
-        for (let i = 0; i < 20; i++) {
-            setTimeout(rollSlot, i * i * 5);
-        }
-
-        balanceUpdate()
+    if(money <= 0){
+        alert("Broke lol")
     }
+else {
+    removeMoney(10);
+    if(transactions.length > 20){ // TODO: transactionnél kéne nézni, néha túl megy 20nál
+        transactions.shift()
+    }
+
+    // stilus reset
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].classList.remove("winner");
+    }
+
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            if (i < 19) {
+                rollSlot(false);
+            } else
+                rollSlot(true);
+        }, i * i * 5);
+    }
+
+    balanceUpdate()
+}
     });
 }
 
-function rollSlot() {
+function rollSlot(isLast) {
     let randomNums = generateNewRandoms();
-    let cols = document.querySelectorAll(".col");
     for (let j = 0; j < cols.length; j++) {
         cols[j].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[j])}"></i>`;
     }
+    if (isLast) {
+        checkWin(randomNums);
+    }
+}
+
+function checkWin(rolledNums) {
+    let winMultiplier = 0;
+    for (let i = 0; i < 3; i++) {
+        // sor
+        if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
+            cols[i * 3].classList.add("winner");
+            cols[1 + i * 3].classList.add("winner");
+            cols[2 + i * 3].classList.add("winner");
+            winMultiplier += 1;
+        }
+
+        // oszlop
+        if (rolledNums[i] === rolledNums[i + 3] && rolledNums[i] === rolledNums[i + 6]) {
+            cols[i].classList.add("winner");
+            cols[i + 3].classList.add("winner");
+            cols[i + 6].classList.add("winner");
+            winMultiplier += 1;
+        }
+    }
+
+    console.log(winMultiplier)
 }

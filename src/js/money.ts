@@ -33,6 +33,7 @@ let table: HTMLTableElement | null = document.querySelectorAll<HTMLTableElement>
 let resultButton: HTMLButtonElement | null = document.querySelectorAll<HTMLButtonElement>(".button")[1];
 resultButton?.addEventListener("click", (index) => {
     if (table) {
+        table.innerHTML = "";
         transactions.forEach((transaction, index) => {
             let row = table?.insertRow(0);
             let cell1 = row?.insertCell(0);

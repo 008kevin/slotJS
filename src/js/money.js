@@ -1,3 +1,4 @@
+"use strict";
 let money;
 let transactions = [];
 if (localStorage.getItem("money") !== null) {
@@ -29,6 +30,7 @@ let table = document.querySelectorAll(".table")[0];
 let resultButton = document.querySelectorAll(".button")[1];
 resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
     if (table) {
+        table.innerHTML = "";
         transactions.forEach((transaction, index) => {
             let row = table === null || table === void 0 ? void 0 : table.insertRow(0);
             let cell1 = row === null || row === void 0 ? void 0 : row.insertCell(0);

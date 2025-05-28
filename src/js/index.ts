@@ -11,7 +11,7 @@ const spin : HTMLButtonElement = document.querySelectorAll<HTMLButtonElement>(".
 
 if (spin) {
     spin.addEventListener("click", () => {
-        let randomNums : number[] = generateNewRandoms();1
+        let randomNums : number[] = generateNewRandoms();
         let cols = document.querySelectorAll<HTMLElement>(".col");
         for (let i = 0; i < cols.length; i++) {
             cols[i].innerText = randomNums[i].toString(); //fontawesome

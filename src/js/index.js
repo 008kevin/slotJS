@@ -90,6 +90,8 @@ function rollSlot(isLast) {
 function checkWin(rolledNums) {
     let winMultiplier = 0;
     let winMoney = 10; // alap tét
+    let totalMultiplier = 1;
+
     for (let i = 0; i < 3; i++) {
         // sor
         //kevin ez mi :cry: 
@@ -99,7 +101,7 @@ function checkWin(rolledNums) {
             cols[1 + i * 3].classList.add("winner", "horizontal");
             cols[2 + i * 3].classList.add("winner", "horizontal");
             winMultiplier += 1;
-            winMoney *= getMultiplier(rolledNums[i * 3]);
+            totalMultiplier *= getMultiplier(rolledNums[i * 3]);
         }
 
         // oszlop
@@ -108,7 +110,7 @@ function checkWin(rolledNums) {
             cols[i + 3].classList.add("winner", "vertical");
             cols[i + 6].classList.add("winner", "vertical");
             winMultiplier += 1;
-            winMoney *= getMultiplier(rolledNums[i]);
+            totalMultiplier *= getMultiplier(rolledNums[i]);
         }
     }
 
@@ -118,19 +120,19 @@ function checkWin(rolledNums) {
         cols[4].classList.add("winner", "diagonalFromTop");
         cols[8].classList.add("winner", "diagonalFromTop");
         winMultiplier += 1;
-        winMoney *= getMultiplier(rolledNums[0]);
+        totalMultiplier *= getMultiplier(rolledNums[0]);
     }
     if (rolledNums[6] === rolledNums[4] && rolledNums[6] === rolledNums[2]) {
         cols[6].classList.add("winner", "diagonalFromBottom");
         cols[4].classList.add("winner", "diagonalFromBottom");
         cols[2].classList.add("winner", "diagonalFromBottom");
         winMultiplier += 1;
-        winMoney *= getMultiplier(rolledNums[6]);
+        totalMultiplier *= getMultiplier(rolledNums[6]);
     }
 
     if (winMultiplier > 0) {
-        addMoney(winMoney * winMultiplier);
-        console.log(winMoney * winMultiplier);
+        addMoney(winMoney * totalMultiplier);
+        console.log(winMoney * totalMultiplier);
     }
 
     canSpin = true;

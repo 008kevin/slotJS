@@ -2,9 +2,27 @@ let cols = document.querySelectorAll(".col");
 
 function generateNewRandoms() {
     let randomNums = [];
+    let randomNum = 0;
     let colNum = document.querySelectorAll(".col").length;
     for (let i = 0; i < colNum; i++) {
-        randomNums.push(Math.floor(Math.random() * 10));
+        randomNum = Math.floor(Math.random() * 15)
+        if(randomNum < 5){
+            randomNum = 0 // skull
+        }
+        else if(randomNum < 9){
+            randomNum = 1 // bomba
+        }
+        else if(randomNum < 12){
+            randomNum = 2 // szív
+        }
+        else if(randomNum < 14){
+            randomNum = 3 // pénz
+        }
+        else {
+            randomNum = 4 //korona
+        }
+
+        randomNums.push(randomNum);
     }
     return randomNums;
 }

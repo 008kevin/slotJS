@@ -62,7 +62,9 @@ function rollSlot(isLast) {
         cols[j].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[j])}"></i>`;
     }
     if (isLast) {
-        checkWin(randomNums);
+        setTimeout(() => {
+            checkWin(randomNums);
+        }, 500)
     }
 }
 

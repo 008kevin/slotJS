@@ -15,6 +15,9 @@ else {
 function removeMoney(amount) {
     money -= amount;
     transactions.push(money);
+    if(transactions.length > 20){ // TODO: transactionnél kéne nézni, néha túl megy 20nál
+        transactions.shift()
+    }
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
@@ -23,6 +26,9 @@ function addMoney(amount) {
     money += amount;
     transactions.pop()
     transactions.push(money);
+    if(transactions.length > 20){ // TODO: transactionnél kéne nézni, néha túl megy 20nál
+        transactions.shift()
+    }
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }

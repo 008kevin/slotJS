@@ -18,9 +18,7 @@ else {
     animatePull()
 
     removeMoney(10);
-    if(transactions.length > 20){ // TODO: transactionnél kéne nézni, néha túl megy 20nál
-        transactions.shift()
-    }
+    
 
     // stilus reset
     for (let i = 0; i < cols.length; i++) {

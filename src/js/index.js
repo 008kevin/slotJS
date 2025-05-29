@@ -38,7 +38,7 @@ spin.addEventListener("click", () => {
         animatePull()
 
         removeMoney(10);
-        
+
 
         // stilus reset
         for (let i = 0; i < cols.length; i++) {
@@ -87,6 +87,21 @@ function checkWin(rolledNums) {
             winMultiplier += 1;
         }
     }
+
+    // atlok
+    if (rolledNums[0] === rolledNums[4] && rolledNums[0] === rolledNums[8]) {
+        cols[0].classList.add("winner");
+        cols[4].classList.add("winner");
+        cols[8].classList.add("winner");
+        winMultiplier += 1;
+    }
+    if (rolledNums[6] === rolledNums[4] && rolledNums[6] === rolledNums[2]) {
+        cols[6].classList.add("winner");
+        cols[4].classList.add("winner");
+        cols[2].classList.add("winner");
+        winMultiplier += 1;
+    }
+
     canSpin = true;
     console.log(winMultiplier)
 }

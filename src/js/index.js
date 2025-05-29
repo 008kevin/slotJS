@@ -30,7 +30,7 @@ const spin = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
 
 let canSpin = true;
 spin.addEventListener("click", () => {
-    if(money <= 0){
+    if(money < 10){
         alert("Broke lol")
     }
     else if (canSpin) {

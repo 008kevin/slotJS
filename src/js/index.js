@@ -26,13 +26,15 @@ function generateNewRandoms() {
     }
     return randomNums;
 }
-const spin = document.querySelectorAll(".button")[0];
+const spin = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
 if (spin) {
     spin.addEventListener("click", () => {
     if(money <= 0){
         alert("Broke lol")
     }
 else {
+    animatePull()
+
     removeMoney(10);
     
 
@@ -86,4 +88,11 @@ function checkWin(rolledNums) {
     }
 
     console.log(winMultiplier)
+}
+
+async function animatePull() {
+    spin.style.transform = "scaleZ(-1)"
+    setTimeout(() => {
+        spin.style.transform = "scaleZ(1)"
+    }, 1000)
 }

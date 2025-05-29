@@ -29,4 +29,7 @@ button:hover {
 }
 img[alt="slotArm"]{
     height: 28%;
+    /*rotate: -10deg;*/
+    transform-origin: center 80%;
+    transition: transform 0.5s;
 }

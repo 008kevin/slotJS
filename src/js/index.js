@@ -9,35 +9,36 @@ function generateNewRandoms() {
     return randomNums;
 }
 const spin = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
-if (spin) {
-    spin.addEventListener("click", () => {
+
+let canSpin = true;
+spin.addEventListener("click", () => {
     if(money <= 0){
         alert("Broke lol")
     }
-else {
-    animatePull()
+    else if (canSpin) {
+        canSpin = false;
+        animatePull()
 
-    removeMoney(10);
-    
+        removeMoney(10);
+        
 
-    // stilus reset
-    for (let i = 0; i < cols.length; i++) {
-        cols[i].classList.remove("winner");
+        // stilus reset
+        for (let i = 0; i < cols.length; i++) {
+            cols[i].classList.remove("winner");
+        }
+
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                if (i < 19) {
+                    rollSlot(false);
+                } else
+                    rollSlot(true);
+            }, i * i * 5);
+        }
+
+        balanceUpdate()
     }
-
-    for (let i = 0; i < 20; i++) {
-        setTimeout(() => {
-            if (i < 19) {
-                rollSlot(false);
-            } else
-                rollSlot(true);
-        }, i * i * 5);
-    }
-
-    balanceUpdate()
-}
-    });
-}
+});
 
 function rollSlot(isLast) {
     let randomNums = generateNewRandoms();
@@ -68,7 +69,7 @@ function checkWin(rolledNums) {
             winMultiplier += 1;
         }
     }
-
+    canSpin = true;
     console.log(winMultiplier)
 }
 

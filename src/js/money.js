@@ -12,12 +12,16 @@ else {
     transactions.push(money);
 }
 
+function checkTransactions(){
+    if(transactions.length > 20){
+        transactions.shift()
+    }
+}
+
 function removeMoney(amount) {
     money -= amount;
     transactions.push(money);
-    if(transactions.length > 20){ // TODO: transactionnél kéne nézni, néha túl megy 20nál
-        transactions.shift()
-    }
+    checkTransactions()
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
@@ -26,9 +30,7 @@ function addMoney(amount) {
     money += amount;
     transactions.pop()
     transactions.push(money);
-    if(transactions.length > 20){ // TODO: transactionnél kéne nézni, néha túl megy 20nál
-        transactions.shift()
-    }
+    checkTransactions()
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }

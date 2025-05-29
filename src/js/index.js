@@ -70,6 +70,7 @@ function rollSlot(isLast) {
 
 function checkWin(rolledNums) {
     let winMultiplier = 0;
+    let winMoney = 0;
     for (let i = 0; i < 3; i++) {
         // sor
         if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
@@ -77,6 +78,7 @@ function checkWin(rolledNums) {
             cols[1 + i * 3].classList.add("winner");
             cols[2 + i * 3].classList.add("winner");
             winMultiplier += 1;
+            winMoney += getMultiplier(rolledNums[i * 3]);
         }
 
         // oszlop
@@ -85,6 +87,7 @@ function checkWin(rolledNums) {
             cols[i + 3].classList.add("winner");
             cols[i + 6].classList.add("winner");
             winMultiplier += 1;
+            winMoney += getMultiplier(rolledNums[i]);
         }
     }
 
@@ -94,16 +97,20 @@ function checkWin(rolledNums) {
         cols[4].classList.add("winner");
         cols[8].classList.add("winner");
         winMultiplier += 1;
+        winMoney += getMultiplier(rolledNums[0]);
     }
     if (rolledNums[6] === rolledNums[4] && rolledNums[6] === rolledNums[2]) {
         cols[6].classList.add("winner");
         cols[4].classList.add("winner");
         cols[2].classList.add("winner");
         winMultiplier += 1;
+        winMoney += getMultiplier(rolledNums[6]);
     }
 
+    addMoney(winMoney * winMultiplier);
+
     canSpin = true;
-    console.log(winMultiplier)
+    //console.log(winMultiplier)
 }
 
 async function animatePull() {

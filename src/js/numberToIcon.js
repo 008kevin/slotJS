@@ -1,11 +1,15 @@
-let icons = {
-    0: "fa-skull", // 0.1 db5
-    1: "fa-bomb",  // 0.5 db4
-    2: "fa-heart", // 1 db3
-    3: "fa-money-bill", // 1.5 db2
-    4: "fa-crown", // 2 db1
-}
+let icons = [
+    {icon: "fa-skull", multiplier: 0.1}, // 0.1 db5
+    {icon: "fa-bomb", multiplier: 0.5},  // 0.5 db4
+    {icon: "fa-heart", multiplier: 1}, // 1 db3
+    {icon: "fa-money-bill", multiplier: 1.5}, // 1.5 db2
+    {icon: "fa-crown", multiplier: 2}, // 2 db1
+]
 
 function translateToIcon(number) {
-    return number in icons ? icons[number] : "fa-square";
+    return icons.length > number ? icons[number].icon : "fa-square";
+}
+
+function getMultiplier(number) {
+    return icons.length > number ? icons[number].multiplier : 0;
 }

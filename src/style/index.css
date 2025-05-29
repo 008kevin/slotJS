@@ -32,7 +32,7 @@ h1 {
 .row {
     margin-bottom: 0;
     display: flex;
-    align-items: center; /* Új: a slot arm igazítása a slot sorokhoz */
+    align-items: center; 
 }
 
 .col-10 {
@@ -46,8 +46,8 @@ h1 {
     padding: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Új: a slot arm közvetlenül a slot mellé kerül */
-    height: 316px; /* biztosítja, hogy a slot arm magassága igazodjon a slot rácshoz */
+    justify-content: flex-start; 
+    height: 316px;
 }
 
 .col {
@@ -169,6 +169,13 @@ img[alt="slotArm"]:active {
     transform: translateY(-2px) scale(1.04);
 }
 
+.button.disabled-spin {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    filter: grayscale(0.5);
+}
+
 .table {
     margin-top: 30px;
     background: #fff;
@@ -178,4 +185,8 @@ img[alt="slotArm"]:active {
 
 .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: #fffbe6;
+}
+
+img[alt=\"slotArm\"]{
+    transform-origin: -20px center; /* lehet hogy kurvara nem csinal semmit, de itthagyom */
 }

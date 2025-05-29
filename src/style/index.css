@@ -27,3 +27,6 @@ button:hover {
 .winner {
     background-color: green;
 }
+img[alt="slotArm"]{
+    height: 28%;
+}

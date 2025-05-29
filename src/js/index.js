@@ -42,7 +42,7 @@ spin.addEventListener("click", () => {
 
         // stilus reset
         for (let i = 0; i < cols.length; i++) {
-            cols[i].classList.remove("winner");
+            cols[i].classList = ["col"];
         }
 
         for (let i = 0; i < 20; i++) {
@@ -72,18 +72,18 @@ function checkWin(rolledNums) {
     for (let i = 0; i < 3; i++) {
         // sor
         if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
-            cols[i * 3].classList.add("winner");
-            cols[1 + i * 3].classList.add("winner");
-            cols[2 + i * 3].classList.add("winner");
+            cols[i * 3].classList.add("winner", "horizontal");
+            cols[1 + i * 3].classList.add("winner", "horizontal");
+            cols[2 + i * 3].classList.add("winner", "horizontal");
             winMultiplier += 1;
             winMoney *= getMultiplier(rolledNums[i * 3]);
         }
 
         // oszlop
         if (rolledNums[i] === rolledNums[i + 3] && rolledNums[i] === rolledNums[i + 6]) {
-            cols[i].classList.add("winner");
-            cols[i + 3].classList.add("winner");
-            cols[i + 6].classList.add("winner");
+            cols[i].classList.add("winner", "vertical");
+            cols[i + 3].classList.add("winner", "vertical");
+            cols[i + 6].classList.add("winner", "vertical");
             winMultiplier += 1;
             winMoney *= getMultiplier(rolledNums[i]);
         }
@@ -91,16 +91,16 @@ function checkWin(rolledNums) {
 
     // atlok
     if (rolledNums[0] === rolledNums[4] && rolledNums[0] === rolledNums[8]) {
-        cols[0].classList.add("winner");
-        cols[4].classList.add("winner");
-        cols[8].classList.add("winner");
+        cols[0].classList.add("winner", "diagonalFromTop");
+        cols[4].classList.add("winner", "diagonalFromTop");
+        cols[8].classList.add("winner", "diagonalFromTop");
         winMultiplier += 1;
         winMoney *= getMultiplier(rolledNums[0]);
     }
     if (rolledNums[6] === rolledNums[4] && rolledNums[6] === rolledNums[2]) {
-        cols[6].classList.add("winner");
-        cols[4].classList.add("winner");
-        cols[2].classList.add("winner");
+        cols[6].classList.add("winner", "diagonalFromBottom");
+        cols[4].classList.add("winner", "diagonalFromBottom");
+        cols[2].classList.add("winner", "diagonalFromBottom");
         winMultiplier += 1;
         winMoney *= getMultiplier(rolledNums[6]);
     }

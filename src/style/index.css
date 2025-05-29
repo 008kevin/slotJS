@@ -26,7 +26,55 @@ button:hover {
 
 .winner {
     background-color: green;
+    position: relative;
 }
+.winner.vertical:after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 100%;
+    background-color: red;
+    position: absolute;
+}
+
+.winner.horizontal:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: red;
+    position: absolute;
+}
+
+.winner.diagonalFromTop:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:
+            linear-gradient(to top right,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0) calc(50% - 0.8px),
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,0) calc(50% + 0.8px),
+            rgba(0,0,0,0) 100%);
+    position: absolute;
+}
+.winner.diagonalFromBottom:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background:
+            linear-gradient(to bottom right,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0) calc(50% - 0.8px),
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,0) calc(50% + 0.8px),
+            rgba(0,0,0,0) 100%);
+    position: absolute;
+}
+
 img[alt="slotArm"]{
     height: 28%;
     /*rotate: -10deg;*/

@@ -1,12 +1,72 @@
+/* Alap háttér és középre igazítás */
+body {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.container {
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    padding: 40px 30px 30px 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-family: 'Luckiest Guy', cursive, sans-serif;
+    color: #ffb700;
+    text-shadow: 2px 2px 8px #333;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+#balance {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+.row {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center; /* Új: a slot arm igazítása a slot sorokhoz */
+}
+
+.col-10 {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.col-2 {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Új: a slot arm közvetlenül a slot mellé kerül */
+    height: 316px; /* biztosítja, hogy a slot arm magassága igazodjon a slot rácshoz */
+}
+
 .col {
-    border: 1px black solid;
+    border: 3px solid #ffb700;
     height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 2.2rem;
     font-weight: bold;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #fffbe6 0%, #ffe082 100%);
+    margin: 4px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+}
+
+.col:empty {
+    background: #f0f0f0;
 }
 
 button {
@@ -75,9 +135,47 @@ button:hover {
     position: absolute;
 }
 
-img[alt="slotArm"]{
-    height: 28%;
-    /*rotate: -10deg;*/
-    transform-origin: center 80%;
-    transition: transform 0.5s;
+img[alt="slotArm"] {
+    display: block;
+    margin: 0;
+    height: 316px;
+    max-height: 316px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    transition: transform 0.2s;
+}
+
+img[alt="slotArm"]:active {
+    transform: rotate(-15deg) scale(1.05);
+}
+
+.button {
+    margin: 20px 10px 0 0;
+    padding: 12px 32px;
+    font-size: 1.2rem;
+    background: linear-gradient(90deg, #ffb700 0%, #ff6f00 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.button:hover {
+    background: linear-gradient(90deg, #ff6f00 0%, #ffb700 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.table {
+    margin-top: 30px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #fffbe6;
 }

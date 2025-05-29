@@ -26,21 +26,37 @@ function generateNewRandoms() {
     }
     return randomNums;
 }
-const spin = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
 
+const spinArm = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
+const spinButton = document.querySelectorAll(".button")[1];
+ //visszarakom megis csinalok belole egy olyan oriasi vilagitosat mint a casinokon// 
+//ez egy todo nekem
 let canSpin = true;
-spin.addEventListener("click", () => {
+function setSpinActive(active) {
+    if (active) {
+        spinArm.style.opacity = "1";
+        spinArm.style.pointerEvents = "auto";
+        spinButton.style.opacity = "1";
+        spinButton.style.pointerEvents = "auto";
+        spinButton.classList.remove("disabled-spin");
+    } else {
+        spinArm.style.opacity = "0.5";
+        spinArm.style.pointerEvents = "none";
+        spinButton.style.opacity = "0.5";
+        spinButton.style.pointerEvents = "none";
+        spinButton.classList.add("disabled-spin");
+    }
+}
+
+spinArm.addEventListener("click", () => {
     if(money < 10){
         alert("Broke lol")
     }
     else if (canSpin) {
         canSpin = false;
+        setSpinActive(false);
         animatePull()
-
         removeMoney(10);
-
-
-        // stilus reset
         for (let i = 0; i < cols.length; i++) {
             cols[i].classList = ["col"];
         }
@@ -56,6 +72,10 @@ spin.addEventListener("click", () => {
     }
 });
 
+spinButton.addEventListener("click", () => {
+    spinArm.click();
+});
+
 function rollSlot(isLast) {
     let randomNums = generateNewRandoms();
     for (let j = 0; j < cols.length; j++) {
@@ -67,18 +87,21 @@ function rollSlot(isLast) {
         }, 500)
     }
 }
-
 function checkWin(rolledNums) {
     let winMultiplier = 0;
     let winMoney = 10; // alap tét
+    let totalMultiplier = 1;
+
     for (let i = 0; i < 3; i++) {
         // sor
-        if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
+        //kevin ez mi :cry: 
+        //isten es te tudjatok ezt egyedul, holnapra csak isten fogja tudni
+       if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
             cols[i * 3].classList.add("winner", "horizontal");
             cols[1 + i * 3].classList.add("winner", "horizontal");
             cols[2 + i * 3].classList.add("winner", "horizontal");
             winMultiplier += 1;
-            winMoney *= getMultiplier(rolledNums[i * 3]);
+            totalMultiplier *= getMultiplier(rolledNums[i * 3]);
         }
 
         // oszlop
@@ -87,7 +110,7 @@ function checkWin(rolledNums) {
             cols[i + 3].classList.add("winner", "vertical");
             cols[i + 6].classList.add("winner", "vertical");
             winMultiplier += 1;
-            winMoney *= getMultiplier(rolledNums[i]);
+            totalMultiplier *= getMultiplier(rolledNums[i]);
         }
     }
 
@@ -97,27 +120,31 @@ function checkWin(rolledNums) {
         cols[4].classList.add("winner", "diagonalFromTop");
         cols[8].classList.add("winner", "diagonalFromTop");
         winMultiplier += 1;
-        winMoney *= getMultiplier(rolledNums[0]);
+        totalMultiplier *= getMultiplier(rolledNums[0]);
     }
     if (rolledNums[6] === rolledNums[4] && rolledNums[6] === rolledNums[2]) {
         cols[6].classList.add("winner", "diagonalFromBottom");
         cols[4].classList.add("winner", "diagonalFromBottom");
         cols[2].classList.add("winner", "diagonalFromBottom");
         winMultiplier += 1;
-        winMoney *= getMultiplier(rolledNums[6]);
+        totalMultiplier *= getMultiplier(rolledNums[6]);
     }
 
     if (winMultiplier > 0) {
-        addMoney(winMoney * winMultiplier);
+        addMoney(winMoney * totalMultiplier);
+        console.log(winMoney * totalMultiplier);
     }
 
     canSpin = true;
-    //console.log(winMultiplier)
+    setSpinActive(true);
+    console.log(winMultiplier)
 }
 
 async function animatePull() {
-    spin.style.transform = "scaleZ(-1)"
+    spinArm.style.transition = "transform 0.12s cubic-bezier(.4,2,.6,1)";
+    spinArm.style.transform = "rotate(-15deg) scale(1.08)";
     setTimeout(() => {
-        spin.style.transform = "scaleZ(1)"
-    }, 1000)
+        spinArm.style.transition = "transform 0.35s cubic-bezier(.4,0,.2,1)";
+        spinArm.style.transform = "rotate(0deg) scale(1)";
+    }, 220);
 }

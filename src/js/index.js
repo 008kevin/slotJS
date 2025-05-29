@@ -53,8 +53,6 @@ spin.addEventListener("click", () => {
                     rollSlot(true);
             }, i * i * 5);
         }
-
-        balanceUpdate()
     }
 });
 

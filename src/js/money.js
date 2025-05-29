@@ -11,6 +11,7 @@ else {
     money = 1000;
     transactions.push(money);
 }
+balanceUpdate()
 
 function checkTransactions(){
     if(transactions.length > 20){
@@ -24,6 +25,7 @@ function removeMoney(amount) {
     checkTransactions()
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
+    balanceUpdate()
 }
 
 function addMoney(amount) {
@@ -33,6 +35,7 @@ function addMoney(amount) {
     checkTransactions()
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
+    balanceUpdate()
 }
 
 let table = document.querySelectorAll(".table")[0];

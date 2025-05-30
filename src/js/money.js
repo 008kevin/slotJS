@@ -1,64 +1,57 @@
-let money;
-let transactions = [];
-if (localStorage.getItem("money") !== null) {
-    money = parseFloat(localStorage.getItem("money"));
-    transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    if(transactions == []){
-        transactions.push(money)
+export default class Money {
+    constructor() {
+        this.money = 0;
+        this.transactions = [];
+        if (localStorage.getItem("money") !== null) {
+            this.money = parseFloat(localStorage.getItem("money"));
+            this.transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+            if (this.transactions.length === 0) {
+                this.transactions.push(this.money);
+            }
+        } else {
+            this.money = 1000;
+            this.transactions.push(this.money);
+        }
+        this.balanceUpdate();
+    }
+
+    checkTransactions() {
+        if (this.transactions.length > 20) {
+            this.transactions.shift();
+        }
+    }
+
+    removeMoney(amount) {
+        this.money -= amount;
+        this.transactions.push(this.money);
+        this.checkTransactions();
+        localStorage.setItem("money", this.money.toString());
+        localStorage.setItem("transactions", JSON.stringify(this.transactions));
+        this.balanceUpdate();
+    }
+
+    addMoney(amount) {
+        this.money += amount;
+        if (this.transactions.length > 0) this.transactions.pop();
+        this.transactions.push(this.money);
+        this.checkTransactions();
+        localStorage.setItem("money", this.money.toString());
+        localStorage.setItem("transactions", JSON.stringify(this.transactions));
+        this.balanceUpdate();
+    }
+
+    getTransactions() {
+        return this.transactions;
+    }
+
+    getBalance() {
+        return this.money;
+    }
+
+    balanceUpdate() {
+        const balance = document.querySelector("#balance");
+        if (balance) {
+            balance.innerHTML = `Pénz: ${this.money}$`;
+        }
     }
 }
-else {
-    money = 1000;
-    transactions.push(money);
-}
-balanceUpdate()
-
-function checkTransactions(){
-    if(transactions.length > 20){
-        transactions.shift()
-    }
-}
-
-function removeMoney(amount) {
-    money -= amount;
-    transactions.push(money);
-    checkTransactions()
-    localStorage.setItem("money", money.toString());
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-    balanceUpdate()
-}
-
-function addMoney(amount) {
-    money += amount;
-    transactions.pop()
-    transactions.push(money);
-    checkTransactions()
-    localStorage.setItem("money", money.toString());
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-    balanceUpdate()
-}
-
-let table = document.querySelectorAll(".table")[0];
-let resultButton = document.querySelectorAll(".button")[0];
-resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
-    if (table) {
-        
-        
-        table.innerHTML = "";
-        transactions.forEach((transaction, index) => {
-            let row = table === null || table === void 0 ? void 0 : table.insertRow(0);
-            let cell1 = row === null || row === void 0 ? void 0 : row.insertCell(0);
-            let cell2 = row === null || row === void 0 ? void 0 : row.insertCell(1);
-            cell1.innerText = (index + 1).toString();
-            cell2.innerText = transaction.toString();
-        });
-    }
-});
-
-
-
-function balanceUpdate(){
-    let balance = document.querySelector("#balance")
-    balance.innerHTML = `Pénz: ${money}$`
-}
-

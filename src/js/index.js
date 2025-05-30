@@ -1,150 +1,21 @@
-let cols = document.querySelectorAll(".col");
+import Money from './money.js';
+import NumberToIcon from './numberToIcon.js';
+import SlotMachine from './Slot.js';
 
-function generateNewRandoms() {
-    let randomNums = [];
-    let randomNum = 0;
-    let colNum = document.querySelectorAll(".col").length;
-    for (let i = 0; i < colNum; i++) {
-        randomNum = Math.floor(Math.random() * 15)
-        if(randomNum < 5){
-            randomNum = 0 // skull
-        }
-        else if(randomNum < 9){
-            randomNum = 1 // bomba
-        }
-        else if(randomNum < 12){
-            randomNum = 2 // szív
-        }
-        else if(randomNum < 14){
-            randomNum = 3 // pénz
-        }
-        else {
-            randomNum = 4 //korona
-        }
+const moneyManager = new Money();
+const numberToIcon = new NumberToIcon();
+const slotMachine = new SlotMachine(moneyManager, numberToIcon);
 
-        randomNums.push(randomNum);
-    }
-    return randomNums;
-}
-
-const spinArm = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
-const spinButton = document.querySelectorAll(".button")[1];
- //visszarakom megis csinalok belole egy olyan oriasi vilagitosat mint a casinokon// 
-//ez egy todo nekem
-let canSpin = true;
-function setSpinActive(active) {
-    if (active) {
-        spinArm.style.opacity = "1";
-        spinArm.style.pointerEvents = "auto";
-        spinButton.style.opacity = "1";
-        spinButton.style.pointerEvents = "auto";
-        spinButton.classList.remove("disabled-spin");
-    } else {
-        spinArm.style.opacity = "0.5";
-        spinArm.style.pointerEvents = "none";
-        spinButton.style.opacity = "0.5";
-        spinButton.style.pointerEvents = "none";
-        spinButton.classList.add("disabled-spin");
-    }
-}
-
-spinArm.addEventListener("click", () => {
-    if(money < 10){
-        alert("Broke lol")
-    }
-    else if (canSpin) {
-        canSpin = false;
-        setSpinActive(false);
-        animatePull()
-        removeMoney(10);
-        for (let i = 0; i < cols.length; i++) {
-            cols[i].classList = ["col"];
-        }
-
-        for (let i = 0; i < 20; i++) {
-            setTimeout(() => {
-                if (i < 19) {
-                    rollSlot(false);
-                } else
-                    rollSlot(true);
-            }, i * i * 5);
-        }
+document.querySelectorAll(".button")[0].addEventListener("click", () => {
+    const table = document.querySelectorAll(".table")[0];
+    if (table) {
+        table.innerHTML = "";
+        moneyManager.getTransactions().forEach((transaction, index) => {
+            const row = table.insertRow(0);
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.innerText = (index + 1).toString();
+            cell2.innerText = transaction.toString();
+        });
     }
 });
-
-spinButton.addEventListener("click", () => {
-    spinArm.click();
-});
-
-function rollSlot(isLast) {
-    let randomNums = generateNewRandoms();
-    for (let j = 0; j < cols.length; j++) {
-        cols[j].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[j])}"></i>`;
-    }
-    if (isLast) {
-        setTimeout(() => {
-            checkWin(randomNums);
-        }, 500)
-    }
-}
-function checkWin(rolledNums) {
-    let winMultiplier = 0;
-    let winMoney = 10; // alap tét
-    let totalMultiplier = 1;
-
-    for (let i = 0; i < 3; i++) {
-        // sor
-        //kevin ez mi :cry: 
-        //isten es te tudjatok ezt egyedul, holnapra csak isten fogja tudni
-       if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
-            cols[i * 3].classList.add("winner", "horizontal");
-            cols[1 + i * 3].classList.add("winner", "horizontal");
-            cols[2 + i * 3].classList.add("winner", "horizontal");
-            winMultiplier += 1;
-            totalMultiplier *= getMultiplier(rolledNums[i * 3]);
-        }
-
-        // oszlop
-        if (rolledNums[i] === rolledNums[i + 3] && rolledNums[i] === rolledNums[i + 6]) {
-            cols[i].classList.add("winner", "vertical");
-            cols[i + 3].classList.add("winner", "vertical");
-            cols[i + 6].classList.add("winner", "vertical");
-            winMultiplier += 1;
-            totalMultiplier *= getMultiplier(rolledNums[i]);
-        }
-    }
-
-    // atlok
-    if (rolledNums[0] === rolledNums[4] && rolledNums[0] === rolledNums[8]) {
-        cols[0].classList.add("winner", "diagonalFromTop");
-        cols[4].classList.add("winner", "diagonalFromTop");
-        cols[8].classList.add("winner", "diagonalFromTop");
-        winMultiplier += 1;
-        totalMultiplier *= getMultiplier(rolledNums[0]);
-    }
-    if (rolledNums[6] === rolledNums[4] && rolledNums[6] === rolledNums[2]) {
-        cols[6].classList.add("winner", "diagonalFromBottom");
-        cols[4].classList.add("winner", "diagonalFromBottom");
-        cols[2].classList.add("winner", "diagonalFromBottom");
-        winMultiplier += 1;
-        totalMultiplier *= getMultiplier(rolledNums[6]);
-    }
-
-    if (winMultiplier > 0) {
-        addMoney(winMoney * totalMultiplier);
-        console.log(winMoney * totalMultiplier);
-    }
-
-    canSpin = true;
-    setSpinActive(true);
-    console.log(winMultiplier)
-}
-
-async function animatePull() {
-    spinArm.style.transition = "transform 0.12s cubic-bezier(.4,2,.6,1)";
-    spinArm.style.transform = "rotate(-15deg) scale(1.08)";
-    setTimeout(() => {
-        spinArm.style.transition = "transform 0.35s cubic-bezier(.4,0,.2,1)";
-        spinArm.style.transform = "rotate(0deg) scale(1)";
-    }, 220);
-}

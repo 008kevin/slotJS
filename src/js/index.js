@@ -49,14 +49,16 @@ function setSpinActive(active) {
 }
 
 spinArm.addEventListener("click", () => {
-    if(money < 10){
+    let bet = document.querySelector("#bet")
+
+    if(money < bet.value){
         alert("Broke lol")
     }
     else if (canSpin) {
         canSpin = false;
         setSpinActive(false);
         animatePull()
-        removeMoney(10);
+        removeMoney(bet.value);
         for (let i = 0; i < cols.length; i++) {
             cols[i].classList = ["col"];
         }
@@ -70,6 +72,7 @@ spinArm.addEventListener("click", () => {
             }, i * i * 5);
         }
     }
+
 });
 
 spinButton.addEventListener("click", () => {
@@ -131,13 +134,13 @@ function checkWin(rolledNums) {
     }
 
     if (winMultiplier > 0) {
-        addMoney(winMoney * totalMultiplier);
+        addMoney(Math.ceil(winMoney * totalMultiplier));
         console.log(winMoney * totalMultiplier);
     }
 
     canSpin = true;
     setSpinActive(true);
-    console.log(winMultiplier)
+    // console.log(winMultiplier)
 }
 
 async function animatePull() {

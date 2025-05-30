@@ -134,12 +134,13 @@ function checkWin(rolledNums) {
     }
 
     if (winMultiplier > 0) {
-        addMoney(Math.ceil(winMoney * totalMultiplier));
-        console.log(winMoney * totalMultiplier);
+        let win = Math.ceil(winMoney * totalMultiplier)
+        addMoney(win);
+        showWin(win);
+    } else {
+        canSpin = true;
+        setSpinActive(true);
     }
-
-    canSpin = true;
-    setSpinActive(true);
     // console.log(winMultiplier)
 }
 
@@ -151,3 +152,16 @@ async function animatePull() {
         spinArm.style.transform = "rotate(0deg) scale(1)";
     }, 220);
 }
+
+const winOverlay = document.getElementById("winOverlay")
+const winText = document.querySelector("#winOverlay p")
+function showWin(money) {
+    winText.textContent = `\$${money}`
+    winOverlay.classList.remove("hidden")
+}
+
+winOverlay.addEventListener("click", () => {
+    winOverlay.classList.add("hidden")
+    canSpin = true;
+    setSpinActive(true);
+})

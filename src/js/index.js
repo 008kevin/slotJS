@@ -48,17 +48,22 @@ function setSpinActive(active) {
     }
 }
 
-spinArm.addEventListener("click", () => {
-    let bet = document.querySelector("#bet")
+document.querySelector("#bet").addEventListener("change", () =>{
+    if(document.querySelector("#bet").value < 10) document.querySelector("#bet").value = 10;
+    if(document.querySelector("#bet").value > 1000) document.querySelector("#bet").value = 1000;
+})
 
-    if(money < bet.value){
+spinArm.addEventListener("click", () => {
+    let bet = document.querySelector("#bet").value;
+
+    if(money < bet){
         alert("Broke lol")
     }
     else if (canSpin) {
         canSpin = false;
         setSpinActive(false);
         animatePull()
-        removeMoney(bet.value);
+        removeMoney(bet);
         for (let i = 0; i < cols.length; i++) {
             cols[i].classList = ["col"];
         }
@@ -72,7 +77,6 @@ spinArm.addEventListener("click", () => {
             }, i * i * 5);
         }
     }
-
 });
 
 spinButton.addEventListener("click", () => {

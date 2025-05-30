@@ -94,54 +94,86 @@ button:hover {
 }
 
 .winner {
-    background-color: green;
+    color: #fa8732;
     position: relative;
+    animation: winner 0.5s;
+    animation-iteration-count: infinite;
+    --fa-beat-scale: 2.0;
+    --win-color: #8fcd4a;
+}
+.winner:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    --horizontal: linear-gradient(to bottom,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) calc(50% - 3px),
+        var(--win-color) calc(50% - 2px),
+    var(--win-color) calc(50% + 2px),
+        rgba(0,0,0,0) calc(50% + 3px),
+        rgba(0,0,0,0) 100%);
+    --vertical: linear-gradient(to right,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) calc(50% - 3px),
+        var(--win-color) calc(50% - 2px),
+        var(--win-color) calc(50% + 2px),
+        rgba(0,0,0,0) calc(50% + 3px),
+        rgba(0,0,0,0) 100%);
+    --diagonalFromTop: linear-gradient(to top right,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) calc(50% - 3px),
+        var(--win-color) calc(50% - 2px),
+        var(--win-color) calc(50% + 2px),
+        rgba(0,0,0,0) calc(50% + 3px),
+        rgba(0,0,0,0) 100%);
+    --diagonalFromBottom: linear-gradient(to bottom right,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) calc(50% - 3px),
+        var(--win-color) calc(50% - 2px),
+        var(--win-color) calc(50% + 2px),
+        rgba(0,0,0,0) calc(50% + 3px),
+        rgba(0,0,0,0) 100%);
 }
 .winner.vertical:after {
-    content: "";
-    display: block;
-    width: 5px;
-    height: 100%;
-    background-color: red;
-    position: absolute;
+    background: var(--vertical);
 }
-
 .winner.horizontal:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 5px;
-    background-color: red;
-    position: absolute;
+    background: var(--horizontal);
 }
-
 .winner.diagonalFromTop:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background:
-            linear-gradient(to top right,
-            rgba(0,0,0,0) 0%,
-            rgba(0,0,0,0) calc(50% - 0.8px),
-            rgba(0,0,0,1) 50%,
-            rgba(0,0,0,0) calc(50% + 0.8px),
-            rgba(0,0,0,0) 100%);
-    position: absolute;
+    background: var(--diagonalFromTop);
 }
 .winner.diagonalFromBottom:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background:
-            linear-gradient(to bottom right,
-            rgba(0,0,0,0) 0%,
-            rgba(0,0,0,0) calc(50% - 0.8px),
-            rgba(0,0,0,1) 50%,
-            rgba(0,0,0,0) calc(50% + 0.8px),
-            rgba(0,0,0,0) 100%);
-    position: absolute;
+    background: var(--diagonalFromBottom);
+}
+.winner.horizontal.vertical:after {
+    background: var(--horizontal), var(--vertical);
+}
+.winner.horizontal.diagonalFromTop:after {
+    background: var(--horizontal), var(--diagonalFromTop);
+}
+.winner.horizontal.diagonalFromBottom:after {
+    background: var(--horizontal), var(--diagonalFromBottom);
+}
+.winner.vertical.diagonalFromTop:after {
+    background: var(--vertical), var(--diagonalFromTop);
+}
+.winner.vertical.diagonalFromBottom:after {
+    background: var(--vertical), var(--diagonalFromBottom);
+}
+.winner.diagonalFromTop.diagonalFromBottom:after {
+    background: var(--diagonalFromTop), var(--diagonalFromBottom);
+}
+.winner.horizontal.vertical.diagonalFromTop:after {
+    background: var(--horizontal), var(--vertical), var(--diagonalFromTop);
+}
+.winner.horizontal.vertical.diagonalFromBottom:after {
+    background: var(--horizontal), var(--vertical), var(--diagonalFromBottom);
+}
+.winner.horizontal.vertical.diagonalFromTop.diagonalFromBottom:after {
+    background: var(--horizontal), var(--vertical), var(--diagonalFromTop), var(--diagonalFromBottom);
 }
 
 img[alt="slotArm"] {
@@ -202,8 +234,6 @@ img[alt=\"slotArm\"]{
 
 #winOverlay {
     position: absolute;
-    left: 0;
-    top: 0;
     width: 50vw;
     height: 50vh;
     text-align: center;

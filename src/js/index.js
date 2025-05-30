@@ -107,6 +107,11 @@ function checkWin(rolledNums) {
             cols[i * 3].classList.add("winner", "horizontal");
             cols[1 + i * 3].classList.add("winner", "horizontal");
             cols[2 + i * 3].classList.add("winner", "horizontal");
+
+            cols[i * 3].firstElementChild.classList.add("fa-beat");
+            cols[1 + i * 3].firstElementChild.classList.add("fa-beat");
+            cols[2 + i * 3].firstElementChild.classList.add("fa-beat");
+
             winMultiplier += 1;
             totalMultiplier *= getMultiplier(rolledNums[i * 3]);
         }
@@ -116,6 +121,11 @@ function checkWin(rolledNums) {
             cols[i].classList.add("winner", "vertical");
             cols[i + 3].classList.add("winner", "vertical");
             cols[i + 6].classList.add("winner", "vertical");
+
+            cols[i].firstElementChild.classList.add("fa-beat");
+            cols[i + 3].firstElementChild.classList.add("fa-beat");
+            cols[i + 6].firstElementChild.classList.add("fa-beat");
+
             winMultiplier += 1;
             totalMultiplier *= getMultiplier(rolledNums[i]);
         }
@@ -126,6 +136,11 @@ function checkWin(rolledNums) {
         cols[0].classList.add("winner", "diagonalFromTop");
         cols[4].classList.add("winner", "diagonalFromTop");
         cols[8].classList.add("winner", "diagonalFromTop");
+
+        cols[0].firstElementChild.classList.add("fa-beat");
+        cols[4].firstElementChild.classList.add("fa-beat");
+        cols[8].firstElementChild.classList.add("fa-beat");
+
         winMultiplier += 1;
         totalMultiplier *= getMultiplier(rolledNums[0]);
     }
@@ -133,6 +148,11 @@ function checkWin(rolledNums) {
         cols[6].classList.add("winner", "diagonalFromBottom");
         cols[4].classList.add("winner", "diagonalFromBottom");
         cols[2].classList.add("winner", "diagonalFromBottom");
+
+        cols[6].firstElementChild.classList.add("fa-beat");
+        cols[4].firstElementChild.classList.add("fa-beat");
+        cols[2].firstElementChild.classList.add("fa-beat");
+
         winMultiplier += 1;
         totalMultiplier *= getMultiplier(rolledNums[6]);
     }

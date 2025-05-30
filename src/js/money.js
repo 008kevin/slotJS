@@ -39,7 +39,7 @@ function addMoney(amount) {
 }
 
 let table = document.querySelectorAll(".table")[0];
-let resultButton = document.querySelectorAll(".button")[1];
+let resultButton = document.querySelectorAll(".button")[0];
 resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
     if (table) {
         

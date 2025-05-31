@@ -215,9 +215,9 @@ button:hover, .button:hover {
 img[alt="slotArm"], #slotArm {
     display: block;
     margin: 0;
-    height: 316px;
-    max-height: 316px;
-    width: auto;
+    max-height: 356px;
+    width: 100%;
+    aspect-ratio: 1 / 4;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
     transition: transform 0.2s;
@@ -303,7 +303,7 @@ img[alt=\"slotArm\"], #slotArm {
     display: none !important;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 991px) {
     .container {
         padding: 18px 4vw;
     }
@@ -323,30 +323,20 @@ img[alt=\"slotArm\"], #slotArm {
     }
 }
 
-@media (max-width: 900px) {
-    .container {
-        padding: 18px 4vw;
-    }
-    #spinButtonImg {
-        width: 90px;
-        height: 48px;
-    }
-    .col {
-        min-width: 70px;
-        max-width: 70px;
-        width: 70px;
-        height: 70px;
-        font-size: 1.3rem;
-    }
-    .col i {
-        font-size: 1.3rem;
-    }
-}
-
-@media (max-width: 550px) {
+@media (max-width: 520px) {
     body > .mx-5 {
         margin-left: 0 !important;
         margin-right: 0 !important;
+    }
+    .col {
+        min-width: 55px;
+        max-width: 55px;
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+    }
+    .col i {
+        font-size: 1.3rem;
     }
 }
 

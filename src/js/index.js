@@ -53,7 +53,7 @@ function checkWin(rolledNums) {
         col.className = "col";
         if (col.firstElementChild) col.firstElementChild.classList.remove("fa-beat");
     });
-
+    //sor
     for (let i = 0; i < 3; i++) {
         if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
             [0, 1, 2].forEach(j => {
@@ -64,6 +64,7 @@ function checkWin(rolledNums) {
             winMultiplier++;
             totalMultiplier *= getMultiplier(rolledNums[i * 3]);
         }
+        //oszlop
         if (rolledNums[i] === rolledNums[i + 3] && rolledNums[i] === rolledNums[i + 6]) {
             [0, 3, 6].forEach(j => {
                 const idx = i + j;
@@ -74,6 +75,7 @@ function checkWin(rolledNums) {
             totalMultiplier *= getMultiplier(rolledNums[i]);
         }
     }
+    //átlók
     if (rolledNums[0] === rolledNums[4] && rolledNums[0] === rolledNums[8]) {
         [0, 4, 8].forEach(idx => {
             cols[idx].classList.add("winner", "diagonalFromTop");
@@ -111,8 +113,11 @@ async function animatePull() {
 }
 
 function showWin(money) {
-    winText.textContent = `\$${money}`;
+    winText.innerHTML = `<p class="text-center" style="font-size:2.5rem;display:block;">BIG WIN!</p><p class="text-center" style="font-size:2.2rem;display:block;margin-top:1rem;">+${money}$</p>`;
     winOverlay.classList.remove("hidden");
+    winOverlay.style.animation = "none";
+    void winOverlay.offsetWidth;
+    winOverlay.style.animation = "";
 }
 
 spinArm.addEventListener("click", () => {

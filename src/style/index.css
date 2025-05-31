@@ -246,22 +246,55 @@ img[alt=\"slotArm\"], #slotArm {
 
 #winOverlay {
     position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
     width: 100vw;
     height: 100vh;
-    text-align: center;
-    font-size: 50px;
-    background-color: #becc4133;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 50%, #fffbe6cc 0%, #ffe082cc 60%, #ffb700cc 100%);
     backdrop-filter: blur(5px);
-    top: 0;
-    left: 0;
+    animation: bigwin-bg 1.2s cubic-bezier(.4,2,.6,1) both;
+    pointer-events: all;
 }
 
 #winOverlay p {
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 4rem;
     color: #ff6f00;
     font-weight: bold;
-    text-shadow: 0 2px 8px #fffbe6;
+    text-shadow: 0 2px 24px #fffbe6, 0 0 48px #ffb700;
+    animation: bigwin-text 1.2s cubic-bezier(.4,2,.6,1) both, bigwin-glow 1.2s infinite alternate;
+    letter-spacing: 2px;
+}
+
+@keyframes bigwin-bg {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes bigwin-text {
+    0% {
+        transform: scale(0.7) rotate(-10deg);
+        opacity: 0;
+        filter: blur(8px);
+    }
+    60% {
+        transform: scale(1.15) rotate(3deg);
+        opacity: 1;
+        filter: blur(0px);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+@keyframes bigwin-glow {
+    0% { text-shadow: 0 2px 24px #fffbe6, 0 0 48px #ffb700; }
+    100% { text-shadow: 0 2px 48px #ffe082, 0 0 96px #ffb700; }
 }
 
 .hidden {

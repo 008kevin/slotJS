@@ -12,8 +12,6 @@ body {
     border-radius: 24px;
     box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.18);
     padding: 48px 36px 36px 36px;
-    margin-top: 48px;
-    margin-bottom: 48px;
     position: relative;
 }
 
@@ -222,10 +220,6 @@ img[alt="slotArm"], #slotArm {
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
     transition: transform 0.2s;
-    transform-origin: -20px center;
-    position: relative;
-    left: -180px;
-    top: -80px;
 }
 
 img[alt="slotArm"]:active, #slotArm:active {
@@ -258,9 +252,12 @@ img[alt=\"slotArm\"], #slotArm {
     align-items: center;
     justify-content: center;
     background: radial-gradient(circle at 50% 50%, #fffbe6cc 0%, #ffe082cc 60%, #ffb700cc 100%);
-    backdrop-filter: blur(5px);
     animation: bigwin-bg 1.2s cubic-bezier(.4,2,.6,1) both;
     pointer-events: all;
+    text-align: center;
+    font-size: 50px;
+    background-color: rgba(255, 129, 22, 0.32);
+    backdrop-filter: blur(5px) grayscale(60%);
 }
 
 #winOverlay p {
@@ -329,10 +326,28 @@ img[alt=\"slotArm\"], #slotArm {
         font-size: 1.3rem;
     }
 }
-@media (max-width: 1400px) {
-    #slotArm {
-        display: none !important;
-    }
+
+#historyModal {
+    width: 80vw;
+    max-width: 800px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+#historyModal button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    aspect-ratio: 1;
+    font-size: 0.8rem;
+    width: 30px;
+    margin: 5px;
+    padding: 0;
+}
+
+#historyModal::backdrop {
+    backdrop-filter: blur(5px) brightness(0.8);
 }
 
 @keyframes spinBtnColorAnim {

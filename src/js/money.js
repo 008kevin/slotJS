@@ -56,8 +56,24 @@ function balanceUpdate(){
             let row = table === null || table === void 0 ? void 0 : table.insertRow(0);
             let cell1 = row === null || row === void 0 ? void 0 : row.insertCell(0);
             let cell2 = row === null || row === void 0 ? void 0 : row.insertCell(1);
-            cell1.innerText = (index + 1).toString();
-            cell2.innerText = transaction.toString();
+            if(index === 0){
+                if(1000-money > 0)
+                    {
+                        cell1.innerText = `Össz. nyeremény: -${1000-money}$`;                         
+                    }
+                else
+                    {
+                    cell1.innerText = `Össz. nyeremény: ${money-1000}$`; 
+                    }
+                cell2.innerText = `Kezdő pénz: 1000$`;
+            }
+            else{
+                cell1.innerText = index.toString();
+                cell2.innerText = `+${transaction - transactions[index-1]}$`;
+                if (transactions[index-1]-transaction > 0){
+                    cell2.innerText = `${transaction - transactions[index-1]}$`;
+                }
+            }
         });
 }
 

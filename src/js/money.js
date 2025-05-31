@@ -52,7 +52,7 @@ function addMoney(amount) {
 function balanceUpdate() {
     const balance = document.querySelector("#balance");
     balance.innerHTML = `Pénz: ${money}$`;
-    const table = document.querySelectorAll(".table")[0];
+    const table = document.getElementById("transactionsTable");
     table.innerHTML = "";
     transactions.forEach((transaction, idx) => {
         const row = table.insertRow(0);

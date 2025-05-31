@@ -222,6 +222,10 @@ img[alt="slotArm"], #slotArm {
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
     transition: transform 0.2s;
+    transform-origin: -20px center;
+    position: relative;
+    left: -180px;
+    top: -80px;
 }
 
 img[alt="slotArm"]:active, #slotArm:active {
@@ -323,6 +327,11 @@ img[alt=\"slotArm\"], #slotArm {
     }
     .col i {
         font-size: 1.3rem;
+    }
+}
+@media (max-width: 1400px) {
+    #slotArm {
+        display: none !important;
     }
 }
 

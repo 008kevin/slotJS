@@ -1,171 +1,108 @@
-let cols = document.querySelectorAll(".col");
-const spinArm = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
+const cols = document.querySelectorAll(".col");
+const spinArm = document.getElementById("slotArm");
 const spinButton = document.getElementById("spinButtonImg");
+const betInput = document.getElementById("bet");
+const winOverlay = document.getElementById("winOverlay");
+const winText = winOverlay.querySelector("p");
+
 let canSpin = true;
-const winOverlay = document.getElementById("winOverlay")
-const winText = document.querySelector("#winOverlay p")
 
-document.querySelector("#bet").addEventListener("change", () =>{
-    if(document.querySelector("#bet").value < 10) document.querySelector("#bet").value = 10;
-    if(document.querySelector("#bet").value > 1000) document.querySelector("#bet").value = 1000;
-})
-
-spinArm.addEventListener("click", () => {
-    let bet = document.querySelector("#bet").value;
-    console.log(bet)
-    if(money < bet){
-        alert("Broke lol")
-    }
-    else if (canSpin) {
-        canSpin = false;
-        setSpinActive(false);
-        animatePull()
-        removeMoney(bet);
-        for (let i = 0; i < cols.length; i++) {
-            cols[i].classList = ["col"];
-        }
-
-        for (let i = 0; i < 20; i++) {
-            setTimeout(() => {
-                if (i < 19) {
-                    rollSlot(false);
-                } else
-                    rollSlot(true);
-            }, i * i * 5);
-        }
-    }
+betInput.addEventListener("change", () => {
+    let bet = Number(betInput.value);
+    if (bet < 10) betInput.value = 10;
+    if (bet > 1000) betInput.value = 1000;
 });
 
-spinButton.addEventListener("click", () => {
-    spinArm.click();
-});
-
-winOverlay.addEventListener("click", () => {
-    winOverlay.classList.add("hidden")
-    canSpin = true;
-    setSpinActive(true);
-})
+function setSpinActive(active) {
+    spinArm.style.opacity = active ? "1" : "0.5";
+    spinArm.style.pointerEvents = active ? "auto" : "none";
+    spinButton.style.opacity = active ? "1" : "0.5";
+    spinButton.style.pointerEvents = active ? "auto" : "none";
+    spinButton.classList.toggle("disabled-spin", !active);
+}
 
 function generateNewRandoms() {
-    let randomNums = [];
-    let randomNum = 0;
-    let colNum = document.querySelectorAll(".col").length;
-    for (let i = 0; i < colNum; i++) {
-        randomNum = Math.floor(Math.random() * 15)
-        if(randomNum < 5){
-            randomNum = 0 // skull
-        }
-        else if(randomNum < 9){
-            randomNum = 1 // bomba
-        }
-        else if(randomNum < 12){
-            randomNum = 2 // szív
-        }
-        else if(randomNum < 14){
-            randomNum = 3 // pénz
-        }
-        else {
-            randomNum = 4 //korona
-        }
-
-        randomNums.push(randomNum);
+    const randomNums = [];
+    for (let i = 0; i < cols.length; i++) {
+        let r = Math.floor(Math.random() * 15);
+        if (r < 5) r = 0; // skull
+        else if (r < 9) r = 1; // bomba
+        else if (r < 12) r = 2; // szív
+        else if (r < 14) r = 3; // pénz
+        else r = 4; // korona
+        randomNums.push(r);
     }
     return randomNums;
 }
 
-function setSpinActive(active) {
-    if (active) {
-        spinArm.style.opacity = "1";
-        spinArm.style.pointerEvents = "auto";
-        spinButton.style.opacity = "1";
-        spinButton.style.pointerEvents = "auto";
-        spinButton.classList.remove("disabled-spin");
-    } else {
-        spinArm.style.opacity = "0.5";
-        spinArm.style.pointerEvents = "none";
-        spinButton.style.opacity = "0.5";
-        spinButton.style.pointerEvents = "none";
-        spinButton.classList.add("disabled-spin");
-    }
-}
-
 function rollSlot(isLast) {
-    let randomNums = generateNewRandoms();
-    for (let j = 0; j < cols.length; j++) {
-        cols[j].innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[j])}"></i>`;
-    }
+    const randomNums = generateNewRandoms();
+    cols.forEach((col, idx) => {
+        col.innerHTML = `<i class="fa-solid ${translateToIcon(randomNums[idx])}"></i>`;
+    });
     if (isLast) {
-        setTimeout(() => {
-            checkWin(randomNums);
-        }, 500)
+        setTimeout(() => checkWin(randomNums), 500);
     }
 }
 
 function checkWin(rolledNums) {
     let winMultiplier = 0;
-    let winMoney = document.querySelector("#bet").value; // alap tét
+    let winMoney = Number(betInput.value);
     let totalMultiplier = 1;
+    cols.forEach(col => {
+        col.className = "col";
+        if (col.firstElementChild) col.firstElementChild.classList.remove("fa-beat");
+    });
+
+    // Rows and columns
     for (let i = 0; i < 3; i++) {
-        // sor
-       if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
-            cols[i * 3].classList.add("winner", "horizontal");
-            cols[1 + i * 3].classList.add("winner", "horizontal");
-            cols[2 + i * 3].classList.add("winner", "horizontal");
-
-            cols[i * 3].firstElementChild.classList.add("fa-beat");
-            cols[1 + i * 3].firstElementChild.classList.add("fa-beat");
-            cols[2 + i * 3].firstElementChild.classList.add("fa-beat");
-
-            winMultiplier += 1;
+        // Row
+        if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
+            [0, 1, 2].forEach(j => {
+                const idx = i * 3 + j;
+                cols[idx].classList.add("winner", "horizontal");
+                cols[idx].firstElementChild.classList.add("fa-beat");
+            });
+            winMultiplier++;
             totalMultiplier *= getMultiplier(rolledNums[i * 3]);
         }
+        // Column
         if (rolledNums[i] === rolledNums[i + 3] && rolledNums[i] === rolledNums[i + 6]) {
-            cols[i].classList.add("winner", "vertical");
-            cols[i + 3].classList.add("winner", "vertical");
-            cols[i + 6].classList.add("winner", "vertical");
-
-            cols[i].firstElementChild.classList.add("fa-beat");
-            cols[i + 3].firstElementChild.classList.add("fa-beat");
-            cols[i + 6].firstElementChild.classList.add("fa-beat");
-
-            winMultiplier += 1;
+            [0, 3, 6].forEach(j => {
+                const idx = i + j;
+                cols[idx].classList.add("winner", "vertical");
+                cols[idx].firstElementChild.classList.add("fa-beat");
+            });
+            winMultiplier++;
             totalMultiplier *= getMultiplier(rolledNums[i]);
         }
     }
+    // Diagonals
     if (rolledNums[0] === rolledNums[4] && rolledNums[0] === rolledNums[8]) {
-        cols[0].classList.add("winner", "diagonalFromTop");
-        cols[4].classList.add("winner", "diagonalFromTop");
-        cols[8].classList.add("winner", "diagonalFromTop");
-
-        cols[0].firstElementChild.classList.add("fa-beat");
-        cols[4].firstElementChild.classList.add("fa-beat");
-        cols[8].firstElementChild.classList.add("fa-beat");
-
-        winMultiplier += 1;
+        [0, 4, 8].forEach(idx => {
+            cols[idx].classList.add("winner", "diagonalFromTop");
+            cols[idx].firstElementChild.classList.add("fa-beat");
+        });
+        winMultiplier++;
         totalMultiplier *= getMultiplier(rolledNums[0]);
     }
     if (rolledNums[6] === rolledNums[4] && rolledNums[6] === rolledNums[2]) {
-        cols[6].classList.add("winner", "diagonalFromBottom");
-        cols[4].classList.add("winner", "diagonalFromBottom");
-        cols[2].classList.add("winner", "diagonalFromBottom");
-
-        cols[6].firstElementChild.classList.add("fa-beat");
-        cols[4].firstElementChild.classList.add("fa-beat");
-        cols[2].firstElementChild.classList.add("fa-beat");
-
-        winMultiplier += 1;
+        [6, 4, 2].forEach(idx => {
+            cols[idx].classList.add("winner", "diagonalFromBottom");
+            cols[idx].firstElementChild.classList.add("fa-beat");
+        });
+        winMultiplier++;
         totalMultiplier *= getMultiplier(rolledNums[6]);
     }
 
     if (winMultiplier > 0) {
-        let win = Math.ceil(winMoney * totalMultiplier)
+        let win = Math.ceil(winMoney * totalMultiplier);
         addMoney(win);
         showWin(win);
     } else {
         canSpin = true;
         setSpinActive(true);
     }
-    // console.log(winMultiplier)
 }
 
 async function animatePull() {
@@ -178,7 +115,36 @@ async function animatePull() {
 }
 
 function showWin(money) {
-    winText.textContent = `\$${money}`
-    winOverlay.classList.remove("hidden")
+    winText.textContent = `\$${money}`;
+    winOverlay.classList.remove("hidden");
 }
+
+spinArm.addEventListener("click", () => {
+    const bet = Number(betInput.value);
+    if (money < bet) {
+        alert("Broke lol");
+        return;
+    }
+    if (canSpin) {
+        canSpin = false;
+        setSpinActive(false);
+        animatePull();
+        removeMoney(bet);
+        cols.forEach(col => col.className = "col");
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                if (i < 19) rollSlot(false);
+                else rollSlot(true);
+            }, i * i * 5);
+        }
+    }
+});
+
+spinButton.addEventListener("click", () => spinArm.click());
+
+winOverlay.addEventListener("click", () => {
+    winOverlay.classList.add("hidden");
+    canSpin = true;
+    setSpinActive(true);
+});
 

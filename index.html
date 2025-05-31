@@ -39,8 +39,18 @@
                     <img src="./src/res/olvasdFel.svg" alt="slotArm" id="slotArm">
                 </div>
                 <div class="col-4">
-                    <table class="table table-striped mb-0">
-                        <tbody>
+                    <table class="table table-striped mb-0 text-center hidden">
+                    </table>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center gap-3">
+                <button class="button" id="showLossBtn">Mennyit veszítettem?</button>
+                <img src="./src/res/spinButton.png" alt="spinButton" id="spinButtonImg" height="64" width="120">
+            </div>
+        </div>
+        <div class="container result">
+            <table class="table table-striped text-center">
+                <tbody>
                             <tr>
                                 <th><i class="fa-solid fa-skull"></i></th>
                                 <td>x0.1</td>
@@ -62,16 +72,7 @@
                                 <td>x10</td>
                             </tr>
                         </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center align-items-center gap-3">
-                <button class="button" id="showLossBtn">Mennyit veszítettem?</button>
-                <img src="./src/res/spinButton.png" alt="spinButton" id="spinButtonImg" height="64" width="120">
-            </div>
-        </div>
-        <div class="container result" style="display: none;">
-            <table class="table table-striped"></table>
+            </table>
         </div>
     </div>
     <div id="winOverlay" class="hidden">

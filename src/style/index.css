@@ -217,6 +217,13 @@ img[alt="slotArm"]:active {
     filter: grayscale(0.5);
 }
 
+#spinButtonImg.disabled-spin {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    filter: grayscale(0.5);
+}
+
 .table {
     margin-top: 30px;
     background: #fff;

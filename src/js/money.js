@@ -38,19 +38,6 @@ function addMoney(amount) {
     balanceUpdate()
 }
 
-
-let resultButton = document.querySelectorAll(".button")[0];
-let resultDiv = document.querySelectorAll(".result")[0];
-resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
-        resultDiv.style.display = "block";
-        resultButton.style.display = "none";
-        document.querySelectorAll(".table")[0].classList.remove("hidden");
-        balanceUpdate();
-    }
-);
-
-
-
 function balanceUpdate(){
     let balance = document.querySelector("#balance");
     balance.innerHTML = `Pénz: ${money}$`;
@@ -65,3 +52,12 @@ function balanceUpdate(){
         });
 }
 
+let resultButton = document.querySelectorAll(".button")[0];
+let resultDiv = document.querySelectorAll(".result")[0];
+resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
+        resultDiv.style.display = "block";
+        resultButton.style.display = "none";
+        document.querySelectorAll(".table")[0].classList.remove("hidden");
+        balanceUpdate();
+    }
+);

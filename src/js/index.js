@@ -1,4 +1,50 @@
 let cols = document.querySelectorAll(".col");
+const spinArm = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
+const spinButton = document.getElementById("spinButtonImg");
+let canSpin = true;
+const winOverlay = document.getElementById("winOverlay")
+const winText = document.querySelector("#winOverlay p")
+
+document.querySelector("#bet").addEventListener("change", () =>{
+    if(document.querySelector("#bet").value < 10) document.querySelector("#bet").value = 10;
+    if(document.querySelector("#bet").value > 1000) document.querySelector("#bet").value = 1000;
+})
+
+spinArm.addEventListener("click", () => {
+    let bet = document.querySelector("#bet").value;
+    console.log(bet)
+    if(money < bet){
+        alert("Broke lol")
+    }
+    else if (canSpin) {
+        canSpin = false;
+        setSpinActive(false);
+        animatePull()
+        removeMoney(bet);
+        for (let i = 0; i < cols.length; i++) {
+            cols[i].classList = ["col"];
+        }
+
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                if (i < 19) {
+                    rollSlot(false);
+                } else
+                    rollSlot(true);
+            }, i * i * 5);
+        }
+    }
+});
+
+spinButton.addEventListener("click", () => {
+    spinArm.click();
+});
+
+winOverlay.addEventListener("click", () => {
+    winOverlay.classList.add("hidden")
+    canSpin = true;
+    setSpinActive(true);
+})
 
 function generateNewRandoms() {
     let randomNums = [];
@@ -27,10 +73,6 @@ function generateNewRandoms() {
     return randomNums;
 }
 
-const spinArm = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
-const spinButton = document.getElementById("spinButtonImg");
-// const spinButton = document.querySelectorAll(".button")[1];
-let canSpin = true;
 function setSpinActive(active) {
     if (active) {
         spinArm.style.opacity = "1";
@@ -47,41 +89,6 @@ function setSpinActive(active) {
     }
 }
 
-document.querySelector("#bet").addEventListener("change", () =>{
-    if(document.querySelector("#bet").value < 10) document.querySelector("#bet").value = 10;
-    if(document.querySelector("#bet").value > 1000) document.querySelector("#bet").value = 1000;
-})
-
-spinArm.addEventListener("click", () => {
-    let bet = document.querySelector("#bet").value;
-
-    if(money < bet){
-        alert("Broke lol")
-    }
-    else if (canSpin) {
-        canSpin = false;
-        setSpinActive(false);
-        animatePull()
-        removeMoney(bet);
-        for (let i = 0; i < cols.length; i++) {
-            cols[i].classList = ["col"];
-        }
-
-        for (let i = 0; i < 20; i++) {
-            setTimeout(() => {
-                if (i < 19) {
-                    rollSlot(false);
-                } else
-                    rollSlot(true);
-            }, i * i * 5);
-        }
-    }
-});
-
-spinButton.addEventListener("click", () => {
-    spinArm.click();
-});
-
 function rollSlot(isLast) {
     let randomNums = generateNewRandoms();
     for (let j = 0; j < cols.length; j++) {
@@ -93,15 +100,13 @@ function rollSlot(isLast) {
         }, 500)
     }
 }
+
 function checkWin(rolledNums) {
     let winMultiplier = 0;
-    let winMoney = 10; // alap tét
+    let winMoney = document.querySelector("#bet").value; // alap tét
     let totalMultiplier = 1;
-
     for (let i = 0; i < 3; i++) {
         // sor
-        //kevin ez mi :cry: 
-        //isten es te tudjatok ezt egyedul, holnapra csak isten fogja tudni
        if (rolledNums[i * 3] === rolledNums[1 + i * 3] && rolledNums[i * 3] === rolledNums[2 + i * 3]) {
             cols[i * 3].classList.add("winner", "horizontal");
             cols[1 + i * 3].classList.add("winner", "horizontal");
@@ -114,8 +119,6 @@ function checkWin(rolledNums) {
             winMultiplier += 1;
             totalMultiplier *= getMultiplier(rolledNums[i * 3]);
         }
-
-        // oszlop
         if (rolledNums[i] === rolledNums[i + 3] && rolledNums[i] === rolledNums[i + 6]) {
             cols[i].classList.add("winner", "vertical");
             cols[i + 3].classList.add("winner", "vertical");
@@ -129,8 +132,6 @@ function checkWin(rolledNums) {
             totalMultiplier *= getMultiplier(rolledNums[i]);
         }
     }
-
-    // atlok
     if (rolledNums[0] === rolledNums[4] && rolledNums[0] === rolledNums[8]) {
         cols[0].classList.add("winner", "diagonalFromTop");
         cols[4].classList.add("winner", "diagonalFromTop");
@@ -176,15 +177,8 @@ async function animatePull() {
     }, 220);
 }
 
-const winOverlay = document.getElementById("winOverlay")
-const winText = document.querySelector("#winOverlay p")
 function showWin(money) {
     winText.textContent = `\$${money}`
     winOverlay.classList.remove("hidden")
 }
 
-winOverlay.addEventListener("click", () => {
-    winOverlay.classList.add("hidden")
-    canSpin = true;
-    setSpinActive(true);
-})

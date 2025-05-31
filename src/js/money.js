@@ -11,6 +11,15 @@ else {
     money = 1000;
     transactions.push(money);
 }
+let resultButton = document.querySelectorAll(".button")[0];
+let resultDiv = document.querySelectorAll(".result")[0];
+resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
+    resultDiv.style.display = "block";
+    resultButton.style.display = "none";
+    document.querySelectorAll(".table")[0].classList.remove("hidden");
+    balanceUpdate();
+}
+);
 balanceUpdate()
 
 function checkTransactions(){
@@ -52,12 +61,3 @@ function balanceUpdate(){
         });
 }
 
-let resultButton = document.querySelectorAll(".button")[0];
-let resultDiv = document.querySelectorAll(".result")[0];
-resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
-        resultDiv.style.display = "block";
-        resultButton.style.display = "none";
-        document.querySelectorAll(".table")[0].classList.remove("hidden");
-        balanceUpdate();
-    }
-);

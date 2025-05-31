@@ -323,6 +323,33 @@ img[alt=\"slotArm\"], #slotArm {
     }
 }
 
+@media (max-width: 900px) {
+    .container {
+        padding: 18px 4vw;
+    }
+    #spinButtonImg {
+        width: 90px;
+        height: 48px;
+    }
+    .col {
+        min-width: 70px;
+        max-width: 70px;
+        width: 70px;
+        height: 70px;
+        font-size: 1.3rem;
+    }
+    .col i {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 550px) {
+    body > .mx-5 {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
 #historyModal {
     width: 80vw;
     max-width: 800px;

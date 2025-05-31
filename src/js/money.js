@@ -24,7 +24,7 @@ resultButton?.addEventListener("click", () => {
 balanceUpdate();
 
 function checkTransactions() {
-    while (transactions.length > 10) {
+    while (transactions.length > 11) {
         transactions.shift();
     }
 }
@@ -52,20 +52,22 @@ function balanceUpdate() {
     const balance = document.querySelector("#balance");
     balance.innerHTML = `Pénz: ${money}$`;
     const table = document.querySelectorAll(".table")[1];
+    const totalWins = document.getElementById("totalWins");
+    const startMoney = document.getElementById("startMoney");
     table.innerHTML = "";
     transactions.forEach((transaction, idx) => {
-        const row = table.insertRow(0);
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        if (idx === 0) {
-            const diff = money - 1000;
-            cell1.innerText = `Össz. nyeremény: ${diff >= 0 ? "+" : ""}${diff}$`;
-            cell2.innerText = `Kezdő pénz: 1000$`;
-        } else {
+        if (idx !== 0) {
+            const row = table.insertRow(0);
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
             const diff = transaction - transactions[idx - 1];
             cell1.innerText = idx.toString();
             cell2.innerText = `${diff >= 0 ? "+" : ""}${diff}$`;
+            cell2.style.color = diff >= 0 ? "green" : "red";
         }
     });
+    const diff = money - 1000;
+    totalWins.innerText = `Össz. nyeremény: ${diff >= 0 ? "+" : ""}${diff}$`;
+    startMoney.innerText = `Kezdő pénz: 1000$`;
 }
 

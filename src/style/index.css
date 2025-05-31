@@ -34,9 +34,10 @@ h1 {
 }
 
 .row {
-    margin-bottom: 0;
     display: flex;
     align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .col-10 {
@@ -305,11 +306,6 @@ img[alt=\"slotArm\"], #slotArm {
 @media (max-width: 900px) {
     .container {
         padding: 18px 4vw;
-    }
-    #winOverlay {
-        width: 90vw;
-        height: 40vh;
-        font-size: 2rem;
     }
     #spinButtonImg {
         width: 90px;

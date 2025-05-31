@@ -1,4 +1,4 @@
-/* Alap háttér és középre igazítás */
+
 body {
     background: linear-gradient(135deg, #232526 0%, #414345 100%);
     min-height: 100vh;
@@ -301,6 +301,69 @@ img[alt=\"slotArm\"], #slotArm {
 
 .hidden {
     display: none !important;
+}
+
+.ad-vertical {
+    position: fixed;
+    top: 80px;
+    height: 520px;
+    width: 160px;
+    background: #d32f2f;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 10001;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 2px;
+    box-shadow: 0 0 12px #b71c1c44;
+    user-select: none;
+    pointer-events: none;
+    display: flex;
+    border-radius: 24px;
+}
+
+.ad-left {
+    left: 40px; 
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.ad-right {
+    right: 40px;
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+}
+
+.mx-5 {
+    margin-left: 200px !important;
+    margin-right: 200px !important;
+}
+
+.ad-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 110px;
+    background: #d32f2f;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bold;
+    z-index: 10001;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 2px;
+    box-shadow: 0 -2px 12px #b71c1c44;
+    user-select: none;
+    pointer-events: none;
+    display: flex;
+}
+
+.ad-footer span {
+    letter-spacing: 0.2em;
 }
 
 @media (max-width: 991px) {

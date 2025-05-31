@@ -246,21 +246,14 @@ img[alt=\"slotArm\"], #slotArm {
 
 #winOverlay {
     position: fixed;
-    width: 50vw;
-    height: 50vh;
+    width: 100vw;
+    height: 100vh;
     text-align: center;
     font-size: 50px;
-    background: linear-gradient(135deg, #fffbe6cc 0%, #ffe082cc 100%);
-    backdrop-filter: blur(7px);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 24px;
-    box-shadow: 0 8px 32px 0 #ffb70055;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+    background-color: #becc4133;
+    backdrop-filter: blur(5px);
+    top: 0;
+    left: 0;
 }
 
 #winOverlay p {

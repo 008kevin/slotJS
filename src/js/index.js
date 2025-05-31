@@ -28,9 +28,8 @@ function generateNewRandoms() {
 }
 
 const spinArm = document.querySelectorAll("img[alt=\"slotArm\"]")[0];
-const spinButton = document.querySelectorAll(".button")[1];
- //visszarakom megis csinalok belole egy olyan oriasi vilagitosat mint a casinokon// 
-//ez egy todo nekem
+const spinButton = document.getElementById("spinButtonImg");
+// const spinButton = document.querySelectorAll(".button")[1];
 let canSpin = true;
 function setSpinActive(active) {
     if (active) {

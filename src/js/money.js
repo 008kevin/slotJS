@@ -38,12 +38,13 @@ function addMoney(amount) {
     balanceUpdate()
 }
 
-let table = document.querySelectorAll(".table")[0];
+let table = document.querySelectorAll(".table")[1]; 
 let resultButton = document.querySelectorAll(".button")[0];
+let resultDiv = document.querySelectorAll(".result")[0];
 resultButton === null || resultButton === void 0 ? void 0 : resultButton.addEventListener("click", (index) => {
     if (table) {
-        
-        
+        resultDiv.style.display = "block";
+        resultButton.style.display = "none";
         table.innerHTML = "";
         transactions.forEach((transaction, index) => {
             let row = table === null || table === void 0 ? void 0 : table.insertRow(0);

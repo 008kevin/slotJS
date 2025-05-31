@@ -217,6 +217,13 @@ img[alt="slotArm"]:active {
     filter: grayscale(0.5);
 }
 
+#spinButtonImg.disabled-spin {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    filter: grayscale(0.5);
+}
+
 .table {
     margin-top: 30px;
     background: #fff;
@@ -253,4 +260,32 @@ img[alt=\"slotArm\"]{
 
 .hidden {
     display: none;
+}
+
+#spinButtonImg {
+    margin: 20px 32px 0 32px; 
+    animation: spinBtnColorAnim 2s linear infinite;
+}
+
+@keyframes spinBtnColorAnim {
+    0% {
+        box-shadow: 0 0 24px 6px #fff70099, 0 0 48px 12px #ff00cc55;
+        filter: hue-rotate(0deg) brightness(1.1);
+    }
+    25% {
+        box-shadow: 0 0 32px 12px #00ffe7cc, 0 0 64px 24px #fffb00aa;
+        filter: hue-rotate(90deg) brightness(1.2);
+    }
+    50% {
+        box-shadow: 0 0 40px 20px #ff00ccbb, 0 0 80px 32px #00ffe7cc;
+        filter: hue-rotate(180deg) brightness(1.3);
+    }
+    75% {
+        box-shadow: 0 0 32px 12px #fffb00cc, 0 0 64px 24px #ff00ccaa;
+        filter: hue-rotate(270deg) brightness(1.2);
+    }
+    100% {
+        box-shadow: 0 0 24px 6px #fff70099, 0 0 48px 12px #ff00cc55;
+        filter: hue-rotate(360deg) brightness(1.1);
+    }
 }

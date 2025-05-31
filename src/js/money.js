@@ -13,11 +13,10 @@ if (localStorage.getItem("money") !== null) {
 }
 
 const resultButton = document.querySelectorAll(".button")[0];
-const resultDiv = document.querySelectorAll(".result")[0];
+const resultModal = document.getElementById("historyModal");
 
 resultButton?.addEventListener("click", () => {
-    resultDiv.style.display = "block";
-    resultButton.style.display = "none";
+    resultModal.showModal();
     document.querySelectorAll(".table")[0].classList.remove("hidden");
     balanceUpdate();
 });
@@ -52,7 +51,7 @@ function addMoney(amount) {
 function balanceUpdate() {
     const balance = document.querySelector("#balance");
     balance.innerHTML = `Pénz: ${money}$`;
-    const table = document.querySelectorAll(".table")[0];
+    const table = document.querySelectorAll(".table")[1];
     table.innerHTML = "";
     transactions.forEach((transaction, idx) => {
         const row = table.insertRow(0);

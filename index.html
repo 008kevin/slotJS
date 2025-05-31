@@ -10,7 +10,7 @@
     <title>Slot Machine</title>
 </head>
 <body>
-    <div class="mx-5">
+    <div class="mx-5 py-5">
         <div class="container">
             <h1 class="text-center">Slot</h1>
             <h3 id="balance" class="text-center"></h3>
@@ -39,7 +39,29 @@
                     <img src="./src/res/olvasdFel.svg" alt="slotArm" id="slotArm">
                 </div>
                 <div class="col-4">
-                    <table class="table table-striped mb-0 text-center hidden">
+                    <table class="table table-striped text-center">
+                        <tbody>
+                        <tr>
+                            <th><i class="fa-solid fa-skull"></i></th>
+                            <td>x0.1</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fa-solid fa-bomb"></i></th>
+                            <td>x1.1</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fa-solid fa-heart"></i></th>
+                            <td>x2</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fa-solid fa-money-bill"></i></th>
+                            <td>x5</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fa-solid fa-crown"></i></th>
+                            <td>x10</td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -48,32 +70,13 @@
                 <img src="./src/res/spinButton.png" alt="spinButton" id="spinButtonImg" height="64" width="120">
             </div>
         </div>
-        <div class="container result">
-            <table class="table table-striped text-center">
-                <tbody>
-                            <tr>
-                                <th><i class="fa-solid fa-skull"></i></th>
-                                <td>x0.1</td>
-                            </tr>
-                            <tr>
-                                <th><i class="fa-solid fa-bomb"></i></th>
-                                <td>x1.1</td>
-                            </tr>
-                            <tr>
-                                <th><i class="fa-solid fa-heart"></i></th>
-                                <td>x2</td>
-                            </tr>
-                            <tr>
-                                <th><i class="fa-solid fa-money-bill"></i></th>
-                                <td>x5</td>
-                            </tr>
-                            <tr>
-                                <th><i class="fa-solid fa-crown"></i></th>
-                                <td>x10</td>
-                            </tr>
-                        </tbody>
+        <dialog id="historyModal">
+            <form method="dialog">
+                <button><i class="fa-solid fa-x"></i></button>
+            </form>
+            <table class="table table-striped mb-0 text-center">
             </table>
-        </div>
+        </dialog>
     </div>
     <div id="winOverlay" class="hidden">
         <p>Big win!</p>

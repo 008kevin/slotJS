@@ -158,6 +158,10 @@ showMoneyModal.addEventListener("click", () => {
 const addMoneyButton = document.getElementById("addMoneyButton");
 const moneyInput = document.getElementById("moneyInput");
 addMoneyButton.addEventListener(("click"), () => {
-    moneyModal.close();
-    addMoney(moneyInput.value);
+    if (moneyInput.value === "" || isNaN(moneyInput.value) || moneyInput.value <= 0 || !(moneyInput.value % 1 === 0)) {
+        alert("Nem megfelelő bemenet");
+    } else {
+        addMoney(moneyInput.value);
+        moneyModal.close();
+    }
 })

@@ -149,3 +149,15 @@ winOverlay.addEventListener("click", () => {
     setSpinActive(true);
 });
 
+const showMoneyModal = document.getElementById("showMoneyModal");
+const moneyModal = document.getElementById("moneyModal");
+showMoneyModal.addEventListener("click", () => {
+    moneyModal.showModal();
+})
+
+const addMoneyButton = document.getElementById("addMoneyButton");
+const moneyInput = document.getElementById("moneyInput");
+addMoneyButton.addEventListener(("click"), () => {
+    moneyModal.close();
+    addMoney(moneyInput.value);
+})

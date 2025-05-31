@@ -340,7 +340,7 @@ img[alt=\"slotArm\"], #slotArm {
     }
 }
 
-#historyModal {
+.popup {
     width: 80vw;
     max-width: 800px;
     border-radius: 12px;
@@ -348,7 +348,7 @@ img[alt=\"slotArm\"], #slotArm {
     box-shadow: 0 4px 16px rgba(0,0,0,0.10);
 }
 
-#historyModal button {
+.popup .closeButton {
     position: absolute;
     right: 0;
     top: 0;
@@ -359,7 +359,7 @@ img[alt=\"slotArm\"], #slotArm {
     padding: 0;
 }
 
-#historyModal::backdrop {
+.popup::backdrop {
     backdrop-filter: blur(5px) brightness(0.8);
 }
 

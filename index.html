@@ -67,17 +67,26 @@
             </div>
             <div class="d-flex justify-content-center align-items-center gap-3">
                 <button class="button" id="showLossBtn">Mennyit veszítettem?</button>
+                <button class="button" id="showMoneyModal">Pénzfeltöltés</button>
                 <img src="./src/res/spinButton.png" alt="spinButton" id="spinButtonImg" height="64" width="120">
             </div>
         </div>
-        <dialog id="historyModal">
+        <dialog id="historyModal" class="popup">
             <form method="dialog">
-                <button><i class="fa-solid fa-x"></i></button>
+                <button class="closeButton"><i class="fa-solid fa-x"></i></button>
             </form>
             <table class="table table-striped mb-0 text-center">
             </table>
             <p class="text-center" id="totalWins">Összes nyeremény: </p>
             <p class="text-center" id="startMoney">Kezdő pénz: </p>
+        </dialog>
+        <dialog id="moneyModal" class="popup">
+            <form method="dialog">
+                <button class="closeButton"><i class="fa-solid fa-x"></i></button>
+            </form>
+            <label for="moneyInput">Pénz: $</label>
+            <input type="number" name="money" id="moneyInput">
+            <button id="addMoneyButton">Pénz feltöltése</button>
         </dialog>
     </div>
     <div id="winOverlay" class="hidden">

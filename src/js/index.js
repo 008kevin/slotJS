@@ -95,7 +95,7 @@ function checkWin(rolledNums) {
 
     if (winMultiplier > 0) {
         let win = Math.ceil(winMoney * totalMultiplier);
-        addMoney(win);
+        addMoney(win, true);
         showWin(win);
     } else {
         canSpin = true;

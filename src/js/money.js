@@ -12,6 +12,13 @@ if (localStorage.getItem("money") !== null) {
     transactions.push(money);
 }
 
+if (localStorage.getItem("wins") === null) {
+    localStorage.setItem("wins", 0)
+}
+if (localStorage.getItem("spent") === null) {
+    localStorage.setItem("spent", 0)
+}
+
 const resultButton = document.querySelectorAll(".button")[0];
 const resultModal = document.getElementById("historyModal");
 
@@ -36,6 +43,7 @@ function removeMoney(amount) {
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
     balanceUpdate();
+    localStorage.setItem("spent", Number(localStorage.getItem("spent")) + amount)
 }
 
 function addMoney(amount) {
@@ -46,6 +54,7 @@ function addMoney(amount) {
     localStorage.setItem("money", money.toString());
     localStorage.setItem("transactions", JSON.stringify(transactions));
     balanceUpdate();
+    localStorage.setItem("wins", Number(localStorage.getItem("wins")) + amount)
 }
 
 function balanceUpdate() {
@@ -53,7 +62,7 @@ function balanceUpdate() {
     balance.innerHTML = `Pénz: ${money}$`;
     const table = document.querySelectorAll(".table")[1];
     const totalWins = document.getElementById("totalWins");
-    const startMoney = document.getElementById("startMoney");
+    const spentMoney = document.getElementById("spentMoney");
     table.innerHTML = "";
     transactions.forEach((transaction, idx) => {
         if (idx !== 0) {
@@ -67,7 +76,7 @@ function balanceUpdate() {
         }
     });
     const diff = money - 1000;
-    totalWins.innerText = `Össz. nyeremény: ${diff >= 0 ? "+" : ""}${diff}$`;
-    startMoney.innerText = `Kezdő pénz: 1000$`;
+    totalWins.innerText = `Össz. nyeremény: +${localStorage.getItem("wins")}$`;
+    spentMoney.innerText = `Össz. elköltött pénz: ${localStorage.getItem("spent")}$`;
 }
 

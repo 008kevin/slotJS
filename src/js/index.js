@@ -4,8 +4,10 @@ const spinButton = document.getElementById("spinButtonImg");
 const betInput = document.getElementById("bet");
 const winOverlay = document.getElementById("winOverlay");
 const winText = winOverlay.querySelector("p");
+const slotTitle = document.getElementById("slot")
 
 let canSpin = true;
+let spinCounter = 0;
 
 betInput.addEventListener("change", () => {
     let bet = Number(betInput.value);
@@ -100,6 +102,13 @@ function checkWin(rolledNums) {
     } else {
         canSpin = true;
         setSpinActive(true);
+    }
+
+    console.log(spinCounter)
+    spinCounter++;
+    if (spinCounter === 5) {
+        spinCounter = 0;
+        secret()
     }
 }
 

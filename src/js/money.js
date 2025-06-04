@@ -48,8 +48,8 @@ function removeMoney(amount) {
 
 function addMoney(amount, isWin = false) {
     money += Number(amount);
-    if (transactions.length > 0) transactions.pop();
     if (isWin) {
+        if (transactions.length > 0) transactions.pop();
         transactions.push(money);
         checkTransactions();
         localStorage.setItem("money", money.toString());

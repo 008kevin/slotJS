@@ -161,7 +161,7 @@ addMoneyButton.addEventListener(("click"), () => {
     if (moneyInput.value === "" || isNaN(moneyInput.value) || moneyInput.value <= 0 || !(moneyInput.value % 1 === 0)) {
         alert("Nem megfelelő bemenet");
     } else {
-        addMoney(moneyInput.value);
+        addMoney(moneyInput.value, false);
         moneyModal.close();
     }
 })

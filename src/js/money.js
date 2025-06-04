@@ -46,15 +46,17 @@ function removeMoney(amount) {
     localStorage.setItem("spent", Number(localStorage.getItem("spent")) + amount)
 }
 
-function addMoney(amount) {
+function addMoney(amount, isWin = false) {
     money += Number(amount);
     if (transactions.length > 0) transactions.pop();
-    transactions.push(money);
-    checkTransactions();
-    localStorage.setItem("money", money.toString());
-    localStorage.setItem("transactions", JSON.stringify(transactions));
+    if (isWin) {
+        transactions.push(money);
+        checkTransactions();
+        localStorage.setItem("money", money.toString());
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+        localStorage.setItem("wins", Number(localStorage.getItem("wins")) + Number(amount))
+    }
     balanceUpdate();
-    localStorage.setItem("wins", Number(localStorage.getItem("wins")) + amount)
 }
 
 function balanceUpdate() {
@@ -75,7 +77,6 @@ function balanceUpdate() {
             cell2.style.color = diff >= 0 ? "green" : "red";
         }
     });
-    const diff = money - 1000;
     totalWins.innerText = `Össz. nyeremény: +${localStorage.getItem("wins")}$`;
     spentMoney.innerText = `Össz. elköltött pénz: ${localStorage.getItem("spent")}$`;
 }

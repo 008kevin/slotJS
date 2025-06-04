@@ -163,5 +163,6 @@ addMoneyButton.addEventListener(("click"), () => {
     } else {
         money += Number(moneyInput.value)
         moneyModal.close();
+        balanceUpdate();
     }
 })
